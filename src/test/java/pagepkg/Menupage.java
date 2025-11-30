@@ -90,7 +90,7 @@ public class Menupage {
     }
 
 
-    //================  FIXED METHOD  ===================
+    
     public void scrollAndClick(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -151,7 +151,7 @@ public class Menupage {
     	scrollAndClick(firstprdaddtocart);
     	}
 
-    //================== SLIDER =======================
+   
 
    
 

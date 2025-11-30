@@ -43,7 +43,7 @@ public class ShopTest extends Baseclass {
 	        );
 	        driver.get("https://bookcarry.com/");
 
-	        // Optional wait to ensure homepage loads
+	       
 	        Thread.sleep(2000);
 	    }
 	}

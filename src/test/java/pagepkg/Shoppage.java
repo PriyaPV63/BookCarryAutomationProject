@@ -112,7 +112,7 @@ public class Shoppage {
     }
 
     
-    // SELECT2 DROPDOWN UTILITY
+    
     
     private void selectFromDropdown(WebElement dropdown, String value) {
         dropdown.click();
@@ -125,7 +125,7 @@ public class Shoppage {
     }
 
    
-    // JS VALUE SETTER UTILITY
+    
     
     private void setValue(WebElement element, String value) {
         js.executeScript("arguments[0].value='" + value + "';", element);
