@@ -81,9 +81,9 @@ public class Shoppage {
     @FindBy(xpath = "//*[@id=\"billing_email_field\"]")
     WebElement emailfield;
 
-    // -----------------------------
+    
     // SHOPPING FLOW
-    // -----------------------------
+  
     public void shopping() {
 
         // Navigate to Shop

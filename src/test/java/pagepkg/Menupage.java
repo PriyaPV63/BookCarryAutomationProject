@@ -1,6 +1,7 @@
 package pagepkg;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Menupage {
@@ -26,7 +28,7 @@ public class Menupage {
     @FindBy(xpath = "//*[@id=\"col-1838586808\"]/div/div/div/div/div[1]/div/div[2]/div[2]/div[3]/a")
     WebElement addtocart;
 
-    @FindBy(xpath = "//a[contains(@class,'added_to_cart') or contains(text(),'View cart')]")
+    @FindBy(xpath = "//div[contains(@class,'widget_shopping_cart')]//a[contains(text(),'View cart')]")
     WebElement viewCartButton;
 
      @FindBy(xpath="//a[contains(@class,'remove')]")
@@ -83,6 +85,9 @@ public class Menupage {
 
     @FindBy(xpath = "//*[@id=\"wpcf7-f13-p90-o1\"]/form/p[3]/span/input")
     WebElement email2;
+    
+    @FindBy(tagName = "a")
+    List<WebElement> allLinks;
 
     public Menupage(WebDriver driver) {
         this.driver = driver;
@@ -100,7 +105,7 @@ public class Menupage {
         js.executeScript("arguments[0].click();", element);
     }
 
-    //=============== CLICK METHODS ====================
+   
 
     public void clickAboutMenu() 
     { 
@@ -117,9 +122,8 @@ public class Menupage {
     	scrollAndClick(addtocart); 
     	}
 
-    public void clickViewCart() 
-    {
-        scrollAndClick(viewCartButton);
+    public void clickViewCart() {
+    	scrollAndClick(viewCartButton);
     }
 
     public void clickRemoveItem() {
@@ -133,7 +137,7 @@ public class Menupage {
 
         By continueButton = By.xpath("//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'continue shopping')]");
 
-        // Wait for overlay/loader
+        
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI, .overlay")));
         } catch (Exception e) {}
@@ -165,7 +169,7 @@ public class Menupage {
         new Select(sortfilterdropdwon).selectByVisibleText(value);
     }
 
-    //=============== TRACK ORDER ====================
+    //TRACK ORDER 
 
     public void clickTrackYourOrderMenu() 
     { 
@@ -187,7 +191,7 @@ public class Menupage {
     	scrollAndClick(trackbtn);
     	}
 
-    //================ REQUEST BOOK ===================
+    //REQUEST BOOK
 
     public void clickRequestBookMenu() 
     { 
@@ -209,7 +213,7 @@ public class Menupage {
     	phoneno.sendKeys(phone); 
     	}
 
-    //================ CONTACT ========================
+    //CONTACT 
 
     public void clickContactMenu() 
     {
@@ -230,4 +234,14 @@ public class Menupage {
     { 
     	email2.sendKeys(mail); }
 
+
+public int getTotalLinks() {
+    return allLinks.size();
 }
+
+public void printAllLinks() {
+    for (WebElement link : allLinks) {
+        System.out.println("Link Text : " + link.getText());
+        System.out.println("URL       : " + link.getAttribute("href"));
+        System.out.println("----------------------------------");
+    }}}

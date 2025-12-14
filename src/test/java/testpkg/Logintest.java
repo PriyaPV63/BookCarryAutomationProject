@@ -7,11 +7,11 @@ import com.aventstack.extentreports.ExtentTest;
 
 import basepkg.Baseclass;
 import excelutility.Utility;
-import pagepkg.Loginpage;
+
 
 public class Logintest extends Baseclass {
 
-    String xl = "D:\\luminarseleniumprj.xlsx"; // 🔸 Update Excel file path
+    String xl = "D:\\luminarseleniumprj.xlsx"; 
     String sheet = "Sheet1";
 
     
@@ -31,20 +31,20 @@ public class Logintest extends Baseclass {
             driver.navigate().refresh();
             Thread.sleep(3000);
 
-            Loginpage lp = new Loginpage(driver);
+            
             test.info("Opening account section");
 
-            lp.accountclick();      
+            login.accountclick();      
             Thread.sleep(2000);
             test.info("Entering credentials");
 
-            lp.signin(email, password);
+            login.signin(email, password);
             test.info("Verifying login...");
 
-            String currentUrl = lp.signinVerification();
+            String currentUrl = login.signinVerification();
             test.pass("Login verification done -> URL: " + currentUrl);
 
-            driver.navigate().to("https://bookcarry.com/");  // ✅ FIXED URL
+            driver.navigate().to("https://bookcarry.com/");
             Thread.sleep(2000);
         }
         test.pass("All login attempts completed successfully");

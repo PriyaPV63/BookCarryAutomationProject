@@ -1,54 +1,73 @@
 package basepkg;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import pagepkg.Loginpage;
+import pagepkg.Menupage;
+import pagepkg.MyaccountandSearchpage;
+import pagepkg.Shoppage;
+
 public class Baseclass {
-	 public static WebDriver driver;
-	    public static ExtentReports extent;
-	    public static ExtentSparkReporter reporter;
 
-	    @BeforeSuite
-	    public void startReport() {
+    public static WebDriver driver;
+    public static ExtentReports extent;
+    public static ExtentSparkReporter reporter;
 
-	        // Path where report will be created
-	        reporter = new ExtentSparkReporter("./Reports/BookCarry_Report.html");
+    //Page Object references (used in all tests)
+    public Loginpage login;
+    public Menupage menu;
+    public MyaccountandSearchpage myacc;
+    public Shoppage shop;
 
-	        // Report appearance
-	        reporter.config().setDocumentTitle("Automation Report");
-	        reporter.config().setReportName("Functional Test Report");
+     @BeforeSuite
+    public void startReport() {
 
-	        // Attach report
-	        extent = new ExtentReports();
-	        extent.attachReporter(reporter);
+        reporter = new ExtentSparkReporter("./Reports/BookCarry_Report.html");
 
-	        // Optional info
-	        extent.setSystemInfo("Project", "BookCarry");
-	        extent.setSystemInfo("Tester", "Priya");
-	        extent.setSystemInfo("Browser", "Chrome");
-	    }
+        reporter.config().setDocumentTitle("Automation Report");
+        reporter.config().setReportName("Functional Test Report");
 
-	
-	@BeforeTest
-	public void setup()
-	{
-		driver=new ChromeDriver();
-		
-		
-		driver.manage().window().maximize();
-		driver.get("https://bookcarry.com/");
-		
-	}
-	@AfterSuite
+        extent = new ExtentReports();
+        extent.attachReporter(reporter);
+
+        extent.setSystemInfo("Project", "BookCarry");
+        extent.setSystemInfo("Tester", "Priya");
+        extent.setSystemInfo("Browser", "Chrome");
+    }
+
+   @BeforeTest
+    public void setup() {
+
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://bookcarry.com/");
+
+        System.out.println("=== Browser Launched ===");
+    }
+
+   @BeforeMethod
+    public void createPageObjects() {
+
+        //page objects ONCE for each test method
+        login = new Loginpage(driver);
+        menu = new Menupage(driver);
+        myacc = new MyaccountandSearchpage(driver);
+        shop = new Shoppage(driver);
+
+        System.out.println("Page Objects Created for Test");
+    }
+
+   
+
+    @AfterSuite
     public void closeReport() {
-        extent.flush();  // VERY IMPORTANT — Saves the report
+        extent.flush();
+        System.out.println("=== Report Generated ===");
     }
 }
 

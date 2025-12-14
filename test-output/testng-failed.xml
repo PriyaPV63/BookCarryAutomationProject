@@ -5,8 +5,11 @@
     <classes>
       <class name="testpkg.MenuTest">
         <methods>
+          <include name="startReport"/>
           <include name="setup"/>
-          <include name="testMenuOperations"/>
+          <include name="testCartOperations"/>
+          <include name="createPageObjects"/>
+          <include name="closeReport"/>
         </methods>
       </class> <!-- testpkg.MenuTest -->
     </classes>
